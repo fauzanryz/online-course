@@ -14,14 +14,14 @@ class Kursus extends Migration
                 'constraint' => 11,
                 'auto_increment' => true,
             ],
-            'judul' => [
+            'judul_kursus' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
-            'deskripsi' => [
+            'deskripsi_kursus' => [
                 'type' => 'TEXT',
             ],
-            'durasi' => [
+            'durasi_kursus' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],

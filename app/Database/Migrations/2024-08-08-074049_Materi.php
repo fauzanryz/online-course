@@ -14,7 +14,14 @@ class Materi extends Migration
                 'constraint' => 11,
                 'auto_increment' => true,
             ],
-            'link' => [
+            'judul_materi' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+            ],
+            'deskripsi_materi' => [
+                'type' => 'TEXT',
+            ],
+            'link_materi' => [
                 'type' => 'TEXT',
             ],
             'id_kursus' => [

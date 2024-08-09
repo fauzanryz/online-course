@@ -2,7 +2,7 @@
 <?= $this->section('content') ?>
 
 <div class="container d-flex justify-content-between align-items-center mt-4">
- <h3>Daftar Kursus</h3>
+ <h4>Daftar Kursus</h4>
  <a href="/kursus/add" class="btn btn-primary">Tambah</a>
 </div>
 <div class="container">
@@ -17,7 +17,8 @@
     <th scope="col">No</th>
     <th scope="col">Judul</th>
     <th scope="col">Deskripsi</th>
-    <th scope="col">Durasi</th>
+    <th scope="col">Durasi(hari)</th>
+    <th scope="col">Materi</th>
     <th scope="col">Aksi</th>
    </tr>
   </thead>
@@ -26,9 +27,15 @@
    <?php foreach ($kursus as $krs) : ?>
     <tr>
      <th><?= $no++; ?></th>
-     <td><?= $krs['judul']; ?></td>
-     <td><?= $krs['deskripsi']; ?></td>
-     <td><?= $krs['durasi']; ?></td>
+     <td><?= $krs['judul_kursus']; ?></td>
+     <td><?= $krs['deskripsi_kursus']; ?></td>
+     <td><?= $krs['durasi_kursus']; ?></td>
+     <td>
+      <a href="<?= base_url('/kursus/detail/' . $krs['id_kursus']); ?>" class="btn btn-success btn-sm" style="color: #ffffff;">
+       Detail
+      </a>
+     </td>
+
      <td>
       <?php ?>
       <a href="<?= base_url('/kursus/edit/' . $krs['id_kursus']); ?>" class="btn btn-warning btn-sm" style="color: #ffffff;">
@@ -43,8 +50,6 @@
        </button>
       </form>
       <?php ?>
-
-
      </td>
     </tr>
    <?php endforeach; ?>

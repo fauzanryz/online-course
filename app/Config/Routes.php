@@ -14,11 +14,11 @@ $routes->post('/kursus/save', 'KursusController::save');
 $routes->delete('/kursus/delete/(:num)', 'KursusController::delete/$1');
 $routes->get('/kursus/edit/(:num)', 'KursusController::edit/$1');
 $routes->post('/kursus/update/(:num)', 'KursusController::update/$1');
+$routes->get('/kursus/detail/(:num)', 'MateriController::index/$1');
 
 // Materi
-$routes->get('/materi', 'MateriController::index');
-$routes->get('/materi/add', 'MateriController::add');
-$routes->post('/materi/save', 'MateriController::save');
+$routes->get('/materi/add/(:num)', 'MateriController::add/$1');
+$routes->post('/materi/save/(:num)', 'MateriController::save/$1');
 $routes->delete('/materi/delete/(:num)', 'MateriController::delete/$1');
 $routes->get('/materi/edit/(:num)', 'MateriController::edit/$1');
 $routes->post('/materi/update/(:num)', 'MateriController::update/$1');

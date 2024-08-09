@@ -9,7 +9,9 @@ class MateriModel extends Model
     protected $table            = 'materi';
     protected $primaryKey       = 'id_materi';
     protected $allowedFields    = [
-        'link',
+        'judul_materi',
+        'deskripsi_materi',
+        'link_materi',
         'id_kursus'
     ];
     public function getMateri($id = false)

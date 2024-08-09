@@ -5,19 +5,32 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\KursusModel;
+use App\Models\MateriModel;
 
 class KursusController extends BaseController
 {
     protected $KursusModel;
+    protected $MateriModel;
     public function __construct()
     {
         $this->KursusModel = new KursusModel();
+        $this->MateriModel = new MateriModel();
     }
     public function index()
     {
+        $kursus = $this->KursusModel->getKursus();
+        $materi = $this->MateriModel->getMateri();
+    
+        $groupedMateri = [];
+        foreach ($materi as $mtr) {
+            $groupedMateri[$mtr['id_kursus']][] = $mtr;
+        }
+    
         $data = [
-            'kursus' => $this->KursusModel->getKursus()
+            'kursus' => $kursus,
+            'groupedMateri' => $groupedMateri
         ];
+
         return view('kursus/index', $data);
     }
     public function add()
@@ -27,21 +40,21 @@ class KursusController extends BaseController
     public function save()
     {
         $validate = $this->validate([
-            'judul' => [
+            'judul_kursus' => [
                 'label' => 'Judul',
                 'rules' => 'required',
                 'errors' => [
                     'required' => '{field} Tidak Boleh Kosong',
                 ],
             ],
-            'deskripsi' => [
+            'deskripsi_kursus' => [
                 'label' => 'Deskripsi',
                 'rules' => 'required',
                 'errors' => [
                     'required' => '{field} Tidak Boleh Kosong',
                 ],
             ],
-            'durasi' => [
+            'durasi_kursus' => [
                 'label' => 'Durasi',
                 'rules' => 'required',
                 'errors' => [
@@ -52,9 +65,9 @@ class KursusController extends BaseController
 
         if ($validate) {
             $this->KursusModel->save([
-                'judul' => esc($this->request->getVar('judul')),
-                'deskripsi' => esc($this->request->getVar('deskripsi')),
-                'durasi' => esc($this->request->getVar('durasi'))
+                'judul_kursus' => esc($this->request->getVar('judul_kursus')),
+                'deskripsi_kursus' => esc($this->request->getVar('deskripsi_kursus')),
+                'durasi_kursus' => esc($this->request->getVar('durasi_kursus'))
             ]);
             session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan!');
             return redirect()->to(base_url('/kursus'));
@@ -79,21 +92,21 @@ class KursusController extends BaseController
     public function update($id)
     {
         $validate = $this->validate([
-            'judul' => [
+            'judul_kursus' => [
                 'label' => 'Judul',
                 'rules' => 'required',
                 'errors' => [
                     'required' => '{field} Tidak Boleh Kosong',
                 ],
             ],
-            'deskripsi' => [
+            'deskripsi_kursus' => [
                 'label' => 'Deskripsi',
                 'rules' => 'required',
                 'errors' => [
                     'required' => '{field} Tidak Boleh Kosong',
                 ],
             ],
-            'durasi' => [
+            'durasi_kursus' => [
                 'label' => 'Durasi',
                 'rules' => 'required',
                 'errors' => [
@@ -105,9 +118,9 @@ class KursusController extends BaseController
         if ($validate) {
             $this->KursusModel->save([
                 'id_kursus' => $id,
-                'judul' => esc($this->request->getVar('judul')),
-                'deskripsi' => esc($this->request->getVar('deskripsi')),
-                'durasi' => esc($this->request->getVar('durasi'))
+                'judul_kursus' => esc($this->request->getVar('judul_kursus')),
+                'deskripsi_kursus' => esc($this->request->getVar('deskripsi_kursus')),
+                'durasi_kursus' => esc($this->request->getVar('durasi_kursus'))
             ]);
             session()->setFlashdata('pesan', 'Data Berhasil Diubah!');
             return redirect()->to(base_url('/kursus'));

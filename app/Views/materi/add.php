@@ -2,7 +2,7 @@
 <?= $this->section('content') ?>
 
 <div class="container d-flex justify-content-between align-items-center mt-4">
- <h3>Tambah Materi</h3>
+ <h4>Tambah Materi</h4>
 </div>
 <div class="container">
  <?php
@@ -11,25 +11,24 @@
    <?= session()->getFlashdata('errors'); ?>
   </div>
  <?php endif; ?>
- <form method="POST" action="<?= base_url('/materi/save'); ?>">
+ <form method="POST" action="<?= base_url('/materi/save/'. $kursus['id_kursus']); ?>">
   <?= csrf_field(); ?>
-  <div class="form-row mb-1">
+  <div class="form-row mb-3">
+   <div class="col">
+    <label class="col-form-label">Judul </label>
+    <input type="text" name="judul_materi" class="form-control" value="<?= old('judul_materi'); ?>">
+   </div>
+   <div class="col">
+    <label class="col-form-label">Deskripsi </label>
+    <input type="text" name="deskripsi_materi" class="form-control" value="<?= old('deskripsi_materi'); ?>">
+   </div>
    <div class="col">
     <label class="col-form-label">Link </label>
-    <input type="text" name="link" class="form-control" value="<?= old('link'); ?>">
+    <input type="text" name="link_materi" class="form-control" value="<?= old('link_materi'); ?>">
    </div>
   </div>
-  <div class="form-group mb-3">
-        <label for="id_kursus">Kursus</label>
-        <select class="form-control" id="id_kursus" name="id_kursus" required>
-            <option value="" disabled selected>--Pilih Kursus--</option>
-            <?php foreach ($kursus as $krs): ?>
-                <option value="<?= $krs['id_kursus']; ?>"><?= $krs['judul']; ?></option>
-            <?php endforeach; ?>
-        </select>
-    </div>
   <button type="submit" class="btn btn-primary">Simpan</button>
-  <a href="<?= base_url('/materi') ?>" class="btn btn-danger">Kembali</a>
+  <a href="<?= base_url('/kursus/detail/'. $kursus['id_kursus']); ?>" class="btn btn-danger">Kembali</a>
  </form>
 </div>
 

@@ -2,7 +2,7 @@
 <?= $this->section('content') ?>
 
 <div class="container d-flex justify-content-between align-items-center mt-4">
- <h3>Edit Kursus</h3>
+ <h4>Edit Kursus</h4>
 </div>
 <div class="container">
  <?php
@@ -16,15 +16,15 @@
   <div class="form-row mb-3">
    <div class="col">
     <label class="col-form-label">Judul </label>
-    <input type="text" name="judul" class="form-control" value="<?= $kursus['judul']; ?>">
+    <input type="text" name="judul_kursus" class="form-control" value="<?= $kursus['judul_kursus']; ?>">
    </div>
    <div class="col">
     <label class="col-form-label">Deskripsi </label>
-    <input type="text" name="deskripsi" class="form-control" value="<?= $kursus['deskripsi']; ?>">
+    <input type="text" name="deskripsi_kursus" class="form-control" value="<?= $kursus['deskripsi_kursus']; ?>">
    </div>
    <div class="col">
-    <label class="col-form-label">Durasi </label>
-    <input type="text" name="durasi" class="form-control" value="<?= $kursus['durasi']; ?>">
+    <label class="col-form-label">Durasi(hari) </label>
+    <input type="text" name="durasi_kursus" class="form-control" value="<?= $kursus['durasi_kursus']; ?>">
    </div>
   </div>
   <button type="submit" class="btn btn-primary">Simpan</button>

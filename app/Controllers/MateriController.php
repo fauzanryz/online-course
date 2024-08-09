@@ -16,24 +16,42 @@ class MateriController extends BaseController
         $this->MateriModel = new MateriModel();
         $this->KursusModel = new KursusModel();
     }
-    public function index()
+    public function index($id)
     {
+        $kursus = $this->KursusModel->find($id); // Mengambil data kursus berdasarkan ID
+        $materi = $this->MateriModel->where('id_kursus', $id)->findAll(); // Mengambil materi berdasarkan ID kursus
+
         $data = [
-            'materi' => $this->MateriModel->getMateri()
+            'kursus' => $kursus,
+            'materi' => $materi,
         ];
         return view('materi/index', $data);
     }
-    public function add()
+    public function add($id)
     {
         $data = [
-            'kursus' => $this->KursusModel->getKursus(),
+            'kursus' => $this->KursusModel->getKursus($id),
         ];
         return view('materi/add', $data);
-    }
-    public function save()
+    }    
+    public function save($id)
     {
         $validate = $this->validate([
-            'link' => [
+            'judul_materi' => [
+                'label' => 'Judul',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} Tidak Boleh Kosong',
+                ],
+            ],
+            'deskripsi_materi' => [
+                'label' => 'Deskripsi',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} Tidak Boleh Kosong',
+                ],
+            ],
+            'link_materi' => [
                 'label' => 'Link',
                 'rules' => 'required',
                 'errors' => [
@@ -44,11 +62,13 @@ class MateriController extends BaseController
 
         if ($validate) {
             $this->MateriModel->save([
-                'link' => esc($this->request->getVar('link')),
-                'id_kursus' => esc($this->request->getVar('id_kursus')),
+                'judul_materi' => esc($this->request->getVar('judul_materi')),
+                'deskripsi_materi' => esc($this->request->getVar('deskripsi_materi')),
+                'link_materi' => esc($this->request->getVar('link_materi')),
+                'id_kursus' => $id,
             ]);
             session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan!');
-            return redirect()->to(base_url('/materi'));
+            return redirect()->to(base_url('/kursus/detail/'.$id));
         } else {
             session()->setFlashdata('errors', $this->validator->listErrors());
             return redirect()->back()->withInput();
@@ -56,22 +76,39 @@ class MateriController extends BaseController
     }
     public function delete($id)
     {
+        $id_kursus = $this->MateriModel->find($id)['id_kursus'];
         $this->MateriModel->delete($id);
         session()->setFlashdata('pesan', 'Data Berhasil Dihapus!');
-        return redirect()->to(base_url('/materi'));
+        return redirect()->to(base_url('/kursus/detail/'.$id_kursus));
     }
     public function edit($id)
     {
         $data = [
             'materi' => $this->MateriModel->getMateri($id),
-            'kursus' => $this->KursusModel->getKursus(),
+            'kursus' => $this->KursusModel->getKursus($id),
         ];
+
         return view('materi/edit', $data);
     }
+
     public function update($id)
     {
         $validate = $this->validate([
-            'link' => [
+            'judul_materi' => [
+                'label' => 'Judul',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} Tidak Boleh Kosong',
+                ],
+            ],
+            'deskripsi_materi' => [
+                'label' => 'Deskripsi',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} Tidak Boleh Kosong',
+                ],
+            ],
+            'link_materi' => [
                 'label' => 'Link',
                 'rules' => 'required',
                 'errors' => [
@@ -80,13 +117,18 @@ class MateriController extends BaseController
             ],
         ]);
 
+        $id_kursus = $this->MateriModel->find($id)['id_kursus'];
+
         if ($validate) {
             $this->MateriModel->save([
                 'id_materi' => $id,
-                'link' => esc($this->request->getVar('link'))
+                'judul_materi' => esc($this->request->getVar('judul_materi')),
+                'deskripsi_materi' => esc($this->request->getVar('deskripsi_materi')),
+                'link_materi' => esc($this->request->getVar('link_materi')),
+                'id_kursus' => $id_kursus,
             ]);
             session()->setFlashdata('pesan', 'Data Berhasil Diubah!');
-            return redirect()->to(base_url('/materi'));
+            return redirect()->to(base_url('/kursus/detail/'.$id_kursus));
         } else {
             session()->setFlashdata('errors', $this->validator->listErrors());
             return redirect()->back()->withInput();

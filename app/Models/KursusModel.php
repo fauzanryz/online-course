@@ -9,9 +9,9 @@ class KursusModel extends Model
     protected $table            = 'kursus';
     protected $primaryKey       = 'id_kursus';
     protected $allowedFields    = [
-        'judul',
-        'deskripsi',
-        'durasi'
+        'judul_kursus',
+        'deskripsi_kursus',
+        'durasi_kursus'
     ];
 
     public function getKursus($id = false)
