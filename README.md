@@ -1,5 +1,5 @@
-Aplikasi Kursus Online
-(Fauzan)
+Aplikasi Kursus Online<br>
+(Fauzan)<br>
 Politeknik Negeri Tanah Laut
 
 Fitur Kursus
