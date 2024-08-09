@@ -1,9 +1,9 @@
-Aplikasi Kursus Online
-Fauzan
+Aplikasi Kursus Online<br>
+(Fauzan)<br>
 Politeknik Negeri Tanah Laut
 
 Fitur Kursus
-![alt text](image.png)
-
+![image](https://github.com/user-attachments/assets/daff0f1b-64e0-4cac-a10a-132cc63a0927)
+<br><br>
 Fitur Materi
-![alt text](image-1.png)
+![image](https://github.com/user-attachments/assets/04b9ac1c-cbf1-4c05-a635-9f34843c6b82)
